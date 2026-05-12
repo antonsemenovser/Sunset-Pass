@@ -685,13 +685,12 @@ button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
 
   .toolbar-btn {
     padding: 7px 10px;
-    font-size: 0;
+    font-size: 0.9rem;
   }
 
-  /* Показываем только эмодзи/иконку */
-  #btnReset::before { content: '↺'; font-size: 1rem; }
-  #btnSave::before  { content: '💾'; font-size: 1rem; }
-  #btnShare::before { content: '🔗'; font-size: 1rem; }
+  .btn-text {
+    display: none;
+  }
 
   .app-layout {
     padding: 16px 12px 80px;
