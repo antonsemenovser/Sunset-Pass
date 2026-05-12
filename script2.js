@@ -18,6 +18,50 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   document.getElementById('_replyto').value = document.getElementById('client_email').value;
 
+  document.getElementById('btnReset').addEventListener('click', function () {
+    if (!confirm('Очистить всю форму? Это действие нельзя отменить.')) return;
+    document.getElementById('questionnaireForm').querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+    document.getElementById('questionnaireForm').querySelectorAll('textarea, input[type="text"], input[type="tel"], input[type="email"]').forEach(el => { if (!['client_name','client_email'].includes(el.id)) el.value = ''; });
+    document.querySelectorAll('.other-input').forEach(el => el.classList.remove('visible'));
+    updateProgress(); updatePreview();
+    showFlash('Форма очищена');
+  });
+
+  document.getElementById('btnSave').addEventListener('click', function () {
+    updateURL(); showFlash('Сохранено!');
+    document.getElementById('saveStatus').textContent = 'Сохранено ' + formatTime();
+  });
+
+  document.getElementById('btnShare').addEventListener('click', function () {
+    updateURL();
+    const url = window.location.href;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => showFlash('Ссылка скопирована!'));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta); showFlash('Ссылка скопирована!');
+    }
+  });
+
+  // Модальное окно
+  const generalForm = document.getElementById('generalForm');
+  if (generalForm) {
+    generalForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('generalSubmitBtn');
+      btn.disabled = true; btn.textContent = 'Отправляем...';
+      document.getElementById('general_replyto').value = document.getElementById('g_email').value;
+      try {
+        const res = await fetch(generalForm.action, { method: 'POST', body: new FormData(generalForm), headers: { 'Accept': 'application/json' } });
+        if (res.ok) { generalForm.style.display = 'none'; document.getElementById('modalSuccess').style.display = 'block'; }
+        else throw new Error();
+      } catch { btn.disabled = false; btn.textContent = 'Отправить обращение'; showFlash('Ошибка. Попробуйте ещё раз.'); }
+    });
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
   document.getElementById('questionnaireForm').addEventListener('change', function () {
     updateProgress();
     updatePreview();
@@ -167,6 +211,37 @@ function updatePreview() {
 
 function escapeHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function updateURL() {
+  const data = {};
+  document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(el => {
+    if (!data[el.name]) data[el.name] = [];
+    data[el.name].push(el.value);
+  });
+  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  const url = new URL(window.location.href);
+  url.searchParams.set('d', b64);
+  window.history.replaceState(null, '', url.toString());
+}
+
+function formatTime() {
+  const d = new Date();
+  return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+}
+
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
 }
 
 function showFlash(msg) {
