@@ -1,6 +1,16 @@
 const TOTAL = 24;
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Добавить поле комментария под каждый вопрос
+  document.querySelectorAll('.question[data-index]').forEach(q => {
+    const name = (q.querySelector('[name]') || {}).name || '';
+    const ta = document.createElement('textarea');
+    ta.className = 'question-comment';
+    ta.name = name + '_comment';
+    ta.placeholder = 'Свой комментарий или уточнение (необязательно)...';
+    q.appendChild(ta);
+  });
+
   updateProgress();
 
   document.getElementById('client_email').addEventListener('input', function () {
