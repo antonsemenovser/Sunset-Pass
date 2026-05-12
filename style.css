@@ -11,6 +11,40 @@ body {
   line-height: 1.6;
 }
 
+/* ─── Шапка компании ─── */
+.company-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.company-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.company-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.company-email {
+  font-size: 0.85rem;
+  color: #e53935;
+  text-decoration: none;
+}
+
+.company-email:hover {
+  text-decoration: underline;
+}
+
 /* ─── Тулбар ─── */
 .toolbar {
   position: sticky;
