@@ -11,27 +11,126 @@ body {
   line-height: 1.6;
 }
 
-.container {
-  max-width: 720px;
+/* ─── Тулбар ─── */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.toolbar-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.save-status {
+  font-size: 0.8rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+.toolbar-right {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.toolbar-btn {
+  padding: 7px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.toolbar-btn:hover {
+  background: #f0f0f0;
+  border-color: #bbb;
+}
+
+.toolbar-btn.primary {
+  background: #2d6a4f;
+  color: #fff;
+  border-color: #2d6a4f;
+}
+
+.toolbar-btn.primary:hover {
+  background: #1b4332;
+  border-color: #1b4332;
+}
+
+/* ─── Flash ─── */
+.flash {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 200;
+  white-space: nowrap;
+}
+
+.flash.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Макет ─── */
+.app-layout {
+  display: flex;
+  gap: 24px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 40px 20px 80px;
+  padding: 32px 24px 80px;
+  align-items: flex-start;
 }
 
+.form-column {
+  flex: 1;
+  min-width: 0;
+  max-width: 720px;
+}
+
+.preview-column {
+  width: 360px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 72px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+/* ─── Прогресс ─── */
 header {
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #1a1a1a;
-}
-
-.subtitle {
-  color: #666;
-  font-size: 1rem;
   margin-bottom: 24px;
 }
 
@@ -41,7 +140,7 @@ h1 {
   background: #e0e0e0;
   border-radius: 3px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .progress-fill {
@@ -53,48 +152,53 @@ h1 {
 }
 
 .progress-text {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: #888;
+  text-align: right;
 }
 
+/* ─── Секции ─── */
 .section {
   background: #fff;
   border-radius: 12px;
-  padding: 32px;
-  margin-bottom: 24px;
+  padding: 28px 32px 20px;
+  margin-bottom: 8px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.section-header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e8f5e9;
 }
 
 .section h2 {
   font-size: 1.1rem;
   font-weight: 600;
   color: #2d6a4f;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e8f5e9;
 }
 
 .question {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
-.question:last-child {
-  margin-bottom: 0;
+.question:last-of-type {
+  margin-bottom: 8px;
 }
 
 label {
   display: block;
   font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
 }
 
 textarea, input[type="text"], input[type="email"], input[type="tel"] {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border: 1.5px solid #ddd;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-family: inherit;
   color: #1a1a1a;
   background: #fafafa;
@@ -103,7 +207,7 @@ textarea, input[type="text"], input[type="email"], input[type="tel"] {
 }
 
 textarea {
-  min-height: 80px;
+  min-height: 72px;
 }
 
 textarea:focus, input:focus {
@@ -113,9 +217,9 @@ textarea:focus, input:focus {
 }
 
 textarea.comment {
-  min-height: 50px;
-  margin-top: 8px;
-  font-size: 0.88rem;
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 0.85rem;
   color: #555;
   background: #f5f5f5;
 }
@@ -125,62 +229,244 @@ textarea.comment::placeholder {
   font-style: italic;
 }
 
+/* ─── Кнопки добавления ─── */
+.add-field-btn {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 12px;
+  background: none;
+  border: 1.5px dashed #c8e6c9;
+  border-radius: 8px;
+  color: #2d6a4f;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.add-field-btn:hover {
+  background: #f0faf4;
+  border-color: #2d6a4f;
+}
+
+.add-section-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: none;
+  border: 1.5px dashed #ddd;
+  border-radius: 10px;
+  color: #888;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.add-section-btn:hover {
+  background: #f8f8f8;
+  border-color: #aaa;
+  color: #444;
+}
+
+/* Динамические поля */
+.dynamic-question {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.dynamic-question-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.dynamic-question input.field-title {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.92rem;
+  border: none;
+  border-bottom: 1.5px solid #ddd;
+  border-radius: 0;
+  background: transparent;
+  padding: 4px 0;
+}
+
+.dynamic-question input.field-title:focus {
+  border-bottom-color: #2d6a4f;
+  background: transparent;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.remove-btn:hover {
+  color: #e53935;
+  background: #fff0f0;
+}
+
+/* Динамические секции */
+.dynamic-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dynamic-section h2[contenteditable="true"] {
+  flex: 1;
+  outline: none;
+  border-bottom: 2px solid #2d6a4f;
+  padding-bottom: 4px;
+}
+
+/* ─── Submit ─── */
 button[type="submit"] {
   display: block;
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   background: #2d6a4f;
   color: #fff;
   border: none;
   border-radius: 10px;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
+  font-family: inherit;
   transition: background 0.2s, transform 0.1s;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
-button[type="submit"]:hover {
-  background: #1b4332;
-}
-
-button[type="submit"]:active {
-  transform: scale(0.99);
-}
-
-button[type="submit"]:disabled {
-  background: #aaa;
-  cursor: not-allowed;
-}
+button[type="submit"]:hover { background: #1b4332; }
+button[type="submit"]:active { transform: scale(0.99); }
+button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
 
 .submit-note {
   text-align: center;
   color: #888;
+  font-size: 0.82rem;
+  margin-top: 10px;
+}
+
+/* ─── Превью панель ─── */
+.preview-panel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.preview-header {
+  padding: 12px 20px;
+  background: #f0faf4;
+  border-bottom: 1px solid #e8f5e9;
   font-size: 0.85rem;
-  margin-top: 12px;
+  font-weight: 600;
+  color: #2d6a4f;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.error-message {
-  background: #fff3f3;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-top: 16px;
-  font-size: 0.9rem;
-  display: none;
+.preview-a4 {
+  padding: 24px 20px;
+  min-height: 400px;
+  font-size: 0.88rem;
+  line-height: 1.6;
 }
 
+.preview-empty {
+  color: #bbb;
+  font-style: italic;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.preview-section {
+  margin-bottom: 20px;
+}
+
+.preview-section-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2d6a4f;
+  border-bottom: 1.5px solid #e8f5e9;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+
+.preview-item {
+  margin-bottom: 10px;
+}
+
+.preview-item-label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.preview-item-value {
+  color: #1a1a1a;
+  white-space: pre-wrap;
+}
+
+.preview-item-comment {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* ─── Планшет ─── */
+@media (max-width: 1024px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .form-column {
+    max-width: 100%;
+  }
+
+  .preview-column {
+    width: 100%;
+    position: static;
+    max-height: none;
+  }
+}
+
+/* ─── Телефон ─── */
 @media (max-width: 600px) {
-  .container {
-    padding: 24px 16px 60px;
+  .toolbar {
+    padding: 8px 16px;
+  }
+
+  .toolbar-title {
+    font-size: 0.85rem;
+  }
+
+  .toolbar-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  .app-layout {
+    padding: 16px 16px 60px;
+    gap: 16px;
   }
 
   .section {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 1.5rem;
+    padding: 20px 16px 14px;
   }
 }

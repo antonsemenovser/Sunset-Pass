@@ -7,143 +7,202 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Sunset Pass</h1>
-      <p class="subtitle">Опросник для разработки системы бронирования парка</p>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <p class="progress-text" id="progressText">Вопрос 1 из 12</p>
-    </header>
 
-    <form id="questionnaireForm" action="https://formspree.io/f/xrejjoav" method="POST">
-      <input type="hidden" name="_replyto" id="_replyto">
-
-      <!-- О парке -->
-      <section class="section">
-        <h2>О парке</h2>
-
-        <div class="question" data-index="1">
-          <label for="park_size">1. Какой размер парка? (площадь, примерно)</label>
-          <textarea id="park_size" name="park_size" placeholder="Например: 2000 кв.м, примерно 50x40 метров"></textarea>
-          <textarea id="park_size_comment" name="park_size_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="2">
-          <label for="max_people">2. Сколько человек максимум могут быть в парке одновременно?</label>
-          <textarea id="max_people" name="max_people" placeholder="Например: 5 человек с собаками"></textarea>
-          <textarea id="max_people_comment" name="max_people_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="3">
-          <label for="slot_duration">3. Какова минимальная и максимальная длительность одного слота?</label>
-          <textarea id="slot_duration" name="slot_duration" placeholder="Например: минимум 30 минут, максимум 2 часа"></textarea>
-          <textarea id="slot_duration_comment" name="slot_duration_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="4">
-          <label for="working_hours">4. Часы работы парка (по дням недели)?</label>
-          <textarea id="working_hours" name="working_hours" placeholder="Например: пн-пт 8:00-20:00, сб-вс 9:00-21:00"></textarea>
-          <textarea id="working_hours_comment" name="working_hours_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-      </section>
-
-      <!-- О бронировании -->
-      <section class="section">
-        <h2>О бронировании</h2>
-
-        <div class="question" data-index="5">
-          <label for="payment">5. Как вы хотите принимать оплату?</label>
-          <textarea id="payment" name="payment" placeholder="Например: онлайн картой, наличными на месте, выставлять счёт"></textarea>
-          <textarea id="payment_comment" name="payment_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="6">
-          <label for="cancellation">6. Нужна ли возможность отмены бронирования? За сколько часов до начала?</label>
-          <textarea id="cancellation" name="cancellation" placeholder="Например: да, за 24 часа до начала / нет, отмена невозможна"></textarea>
-          <textarea id="cancellation_comment" name="cancellation_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="7">
-          <label for="registration">7. Нужна ли регистрация пользователя или достаточно имя + email?</label>
-          <textarea id="registration" name="registration" placeholder="Например: достаточно имени и email / нужна полная регистрация с паролем"></textarea>
-          <textarea id="registration_comment" name="registration_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-      </section>
-
-      <!-- О воротах -->
-      <section class="section">
-        <h2>О воротах</h2>
-
-        <div class="question" data-index="8">
-          <label for="gate_equipment">8. Какое оборудование уже есть на воротах или нужно закупить?</label>
-          <textarea id="gate_equipment" name="gate_equipment" placeholder="Например: уже есть электронный замок марки X / нужно закупить всё с нуля"></textarea>
-          <textarea id="gate_equipment_comment" name="gate_equipment_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="9">
-          <label for="pin_generation">9. PIN-код — кто его генерирует: вы вручную или система автоматически?</label>
-          <textarea id="pin_generation" name="pin_generation" placeholder="Например: система должна генерировать автоматически после оплаты"></textarea>
-          <textarea id="pin_generation_comment" name="pin_generation_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-      </section>
-
-      <!-- О дизайне -->
-      <section class="section">
-        <h2>О дизайне и языке</h2>
-
-        <div class="question" data-index="10">
-          <label for="branding">10. Есть ли логотип, фирменные цвета, название парка?</label>
-          <textarea id="branding" name="branding" placeholder="Например: название 'Koira Park', цвета зелёный и белый, логотип есть (могу прислать)"></textarea>
-          <textarea id="branding_comment" name="branding_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-
-        <div class="question" data-index="11">
-          <label for="language">11. На каком языке должен быть сайт/приложение?</label>
-          <textarea id="language" name="language" placeholder="Например: только финский / финский + английский / финский + русский"></textarea>
-          <textarea id="language_comment" name="language_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-      </section>
-
-      <!-- О сроках -->
-      <section class="section">
-        <h2>О сроках</h2>
-
-        <div class="question" data-index="12">
-          <label for="deadline">12. Когда нужен готовый продукт?</label>
-          <textarea id="deadline" name="deadline" placeholder="Например: через 2 месяца / к лету 2026 / как можно скорее"></textarea>
-          <textarea id="deadline_comment" name="deadline_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
-        </div>
-      </section>
-
-      <!-- Контактные данные -->
-      <section class="section">
-        <h2>Ваши контактные данные</h2>
-        <div class="question">
-          <label for="client_name">Имя</label>
-          <input type="text" id="client_name" name="client_name" required placeholder="Ваше имя">
-        </div>
-        <div class="question">
-          <label for="client_email">Email</label>
-          <input type="email" id="client_email" name="client_email" required placeholder="ваш@email.com">
-        </div>
-        <div class="question">
-          <label for="client_phone">Телефон (необязательно)</label>
-          <input type="tel" id="client_phone" name="client_phone" placeholder="+358 XX XXX XXXX">
-        </div>
-      </section>
-
-      <button type="submit" id="submitBtn">Отправить ответы</button>
-      <p class="submit-note">После отправки мы свяжемся с вами в течение 1-2 рабочих дней.</p>
-
-    </form>
+  <!-- Тулбар -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="toolbar-title">Sunset Pass — Опросник</span>
+      <span class="save-status" id="saveStatus"></span>
+    </div>
+    <div class="toolbar-right">
+      <button class="toolbar-btn" id="btnReset" title="Очистить форму">↺ Заново</button>
+      <button class="toolbar-btn" id="btnSave" title="Сохранить">💾 Сохранить</button>
+      <button class="toolbar-btn primary" id="btnShare" title="Поделиться ссылкой">🔗 Поделиться</button>
+    </div>
   </div>
 
-<script>
-  document.getElementById('client_email').addEventListener('input', function() {
-    document.getElementById('_replyto').value = this.value;
-  });
-</script>
+  <!-- Flash сообщение -->
+  <div class="flash" id="flash"></div>
+
+  <!-- Основной макет -->
+  <div class="app-layout">
+
+    <!-- Колонка с формой -->
+    <div class="form-column">
+      <header>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">Заполнено: 0 из 12</p>
+      </header>
+
+      <form id="questionnaireForm" action="https://formspree.io/f/xrejjoav" method="POST">
+        <input type="hidden" name="_replyto" id="_replyto">
+
+        <!-- О парке -->
+        <section class="section" data-section-id="park">
+          <div class="section-header">
+            <h2 contenteditable="false">О парке</h2>
+          </div>
+
+          <div class="question" data-index="1">
+            <label for="park_size">1. Какой размер парка? (площадь, примерно)</label>
+            <textarea id="park_size" name="park_size" placeholder="Например: 2000 кв.м, примерно 50x40 метров"></textarea>
+            <textarea id="park_size_comment" name="park_size_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="2">
+            <label for="max_people">2. Сколько человек максимум могут быть в парке одновременно?</label>
+            <textarea id="max_people" name="max_people" placeholder="Например: 5 человек с собаками"></textarea>
+            <textarea id="max_people_comment" name="max_people_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="3">
+            <label for="slot_duration">3. Какова минимальная и максимальная длительность одного слота?</label>
+            <textarea id="slot_duration" name="slot_duration" placeholder="Например: минимум 30 минут, максимум 2 часа"></textarea>
+            <textarea id="slot_duration_comment" name="slot_duration_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="4">
+            <label for="working_hours">4. Часы работы парка (по дням недели)?</label>
+            <textarea id="working_hours" name="working_hours" placeholder="Например: пн-пт 8:00-20:00, сб-вс 9:00-21:00"></textarea>
+            <textarea id="working_hours_comment" name="working_hours_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <button type="button" class="add-field-btn" onclick="addField(this)">+ Добавить поле</button>
+        </section>
+
+        <button type="button" class="add-section-btn" onclick="addSection(this)">+ Добавить раздел</button>
+
+        <!-- О бронировании -->
+        <section class="section" data-section-id="booking">
+          <div class="section-header">
+            <h2 contenteditable="false">О бронировании</h2>
+          </div>
+
+          <div class="question" data-index="5">
+            <label for="payment">5. Как вы хотите принимать оплату?</label>
+            <textarea id="payment" name="payment" placeholder="Например: онлайн картой, наличными на месте, выставлять счёт"></textarea>
+            <textarea id="payment_comment" name="payment_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="6">
+            <label for="cancellation">6. Нужна ли возможность отмены бронирования? За сколько часов до начала?</label>
+            <textarea id="cancellation" name="cancellation" placeholder="Например: да, за 24 часа до начала / нет, отмена невозможна"></textarea>
+            <textarea id="cancellation_comment" name="cancellation_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="7">
+            <label for="registration">7. Нужна ли регистрация пользователя или достаточно имя + email?</label>
+            <textarea id="registration" name="registration" placeholder="Например: достаточно имени и email / нужна полная регистрация с паролем"></textarea>
+            <textarea id="registration_comment" name="registration_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <button type="button" class="add-field-btn" onclick="addField(this)">+ Добавить поле</button>
+        </section>
+
+        <button type="button" class="add-section-btn" onclick="addSection(this)">+ Добавить раздел</button>
+
+        <!-- О воротах -->
+        <section class="section" data-section-id="gates">
+          <div class="section-header">
+            <h2 contenteditable="false">О воротах</h2>
+          </div>
+
+          <div class="question" data-index="8">
+            <label for="gate_equipment">8. Какое оборудование уже есть на воротах или нужно закупить?</label>
+            <textarea id="gate_equipment" name="gate_equipment" placeholder="Например: уже есть электронный замок марки X / нужно закупить всё с нуля"></textarea>
+            <textarea id="gate_equipment_comment" name="gate_equipment_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="9">
+            <label for="pin_generation">9. PIN-код — кто его генерирует: вы вручную или система автоматически?</label>
+            <textarea id="pin_generation" name="pin_generation" placeholder="Например: система должна генерировать автоматически после оплаты"></textarea>
+            <textarea id="pin_generation_comment" name="pin_generation_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <button type="button" class="add-field-btn" onclick="addField(this)">+ Добавить поле</button>
+        </section>
+
+        <button type="button" class="add-section-btn" onclick="addSection(this)">+ Добавить раздел</button>
+
+        <!-- О дизайне -->
+        <section class="section" data-section-id="design">
+          <div class="section-header">
+            <h2 contenteditable="false">О дизайне и языке</h2>
+          </div>
+
+          <div class="question" data-index="10">
+            <label for="branding">10. Есть ли логотип, фирменные цвета, название парка?</label>
+            <textarea id="branding" name="branding" placeholder="Например: название 'Koira Park', цвета зелёный и белый, логотип есть (могу прислать)"></textarea>
+            <textarea id="branding_comment" name="branding_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <div class="question" data-index="11">
+            <label for="language">11. На каком языке должен быть сайт/приложение?</label>
+            <textarea id="language" name="language" placeholder="Например: только финский / финский + английский / финский + русский"></textarea>
+            <textarea id="language_comment" name="language_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <button type="button" class="add-field-btn" onclick="addField(this)">+ Добавить поле</button>
+        </section>
+
+        <button type="button" class="add-section-btn" onclick="addSection(this)">+ Добавить раздел</button>
+
+        <!-- О сроках -->
+        <section class="section" data-section-id="deadlines">
+          <div class="section-header">
+            <h2 contenteditable="false">О сроках</h2>
+          </div>
+
+          <div class="question" data-index="12">
+            <label for="deadline">12. Когда нужен готовый продукт?</label>
+            <textarea id="deadline" name="deadline" placeholder="Например: через 2 месяца / к лету 2026 / как можно скорее"></textarea>
+            <textarea id="deadline_comment" name="deadline_comment" class="comment" placeholder="Комментарий (необязательно)"></textarea>
+          </div>
+
+          <button type="button" class="add-field-btn" onclick="addField(this)">+ Добавить поле</button>
+        </section>
+
+        <button type="button" class="add-section-btn" onclick="addSection(this)">+ Добавить раздел</button>
+
+        <!-- Контактные данные -->
+        <section class="section" data-section-id="contacts">
+          <div class="section-header">
+            <h2 contenteditable="false">Ваши контактные данные</h2>
+          </div>
+          <div class="question">
+            <label for="client_name">Имя</label>
+            <input type="text" id="client_name" name="client_name" required placeholder="Ваше имя">
+          </div>
+          <div class="question">
+            <label for="client_email">Email</label>
+            <input type="email" id="client_email" name="client_email" required placeholder="ваш@email.com">
+          </div>
+          <div class="question">
+            <label for="client_phone">Телефон (необязательно)</label>
+            <input type="tel" id="client_phone" name="client_phone" placeholder="+358 XX XXX XXXX">
+          </div>
+        </section>
+
+        <button type="submit" id="submitBtn">Отправить ответы</button>
+        <p class="submit-note">После отправки мы свяжемся с вами в течение 1-2 рабочих дней.</p>
+
+      </form>
+    </div>
+
+    <!-- Панель предпросмотра -->
+    <div class="preview-column">
+      <div class="preview-panel">
+        <div class="preview-header">Предпросмотр</div>
+        <div class="preview-a4" id="previewContent">
+          <p class="preview-empty">Начните заполнять форму — здесь появится предпросмотр</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
