@@ -463,29 +463,30 @@ button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
   margin-top: 2px;
 }
 
-/* ─── Плавающая кнопка ─── */
-.fab {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 150;
-  padding: 14px 22px;
+/* ─── Кнопка внизу ─── */
+.bottom-contact {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.bottom-contact-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
   background: #1a1a1a;
   color: #fff;
   border: none;
-  border-radius: 50px;
-  font-size: 0.9rem;
+  border-radius: 12px;
+  font-size: 1rem;
   font-family: inherit;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: background 0.2s;
 }
 
-.fab:hover {
+.bottom-contact-btn:hover {
   background: #e53935;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(229,57,53,0.35);
 }
 
 /* ─── Модальное окно ─── */
@@ -701,10 +702,7 @@ button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
     padding: 20px 14px 14px;
   }
 
-  .fab {
-    bottom: 16px;
-    right: 16px;
-    padding: 12px 16px;
-    font-size: 0.82rem;
+  .bottom-contact {
+    padding: 0 12px 40px;
   }
 }
