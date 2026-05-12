@@ -358,6 +358,61 @@ function addSection(btn, titleVal) {
   return section;
 }
 
+// ─── Модальное окно ──────────────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const generalForm = document.getElementById('generalForm');
+  if (generalForm) {
+    generalForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('generalSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Отправляем...';
+
+      // Синхронизировать _replyto
+      const emailVal = document.getElementById('g_email').value;
+      document.getElementById('general_replyto').value = emailVal;
+
+      try {
+        const formData = new FormData(generalForm);
+        const res = await fetch(generalForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          generalForm.style.display = 'none';
+          document.getElementById('modalSuccess').style.display = 'block';
+        } else {
+          throw new Error('Ошибка сервера');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Отправить обращение';
+        showFlash('Ошибка отправки. Попробуйте ещё раз.');
+      }
+    });
+  }
+
+  // Закрыть по Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+
 function escapeAttr(str) {
   return str.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }

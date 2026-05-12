@@ -463,6 +463,185 @@ button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
   margin-top: 2px;
 }
 
+/* ─── Плавающая кнопка ─── */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 150;
+  padding: 14px 22px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.fab:hover {
+  background: #e53935;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229,57,53,0.35);
+}
+
+/* ─── Модальное окно ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  transform: translateY(20px);
+  transition: transform 0.2s;
+}
+
+.modal-overlay.open .modal {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.modal-close:hover {
+  color: #333;
+  background: #f0f0f0;
+}
+
+.modal-body {
+  padding: 20px 24px 24px;
+}
+
+.modal-subtitle {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.modal-field {
+  margin-bottom: 16px;
+}
+
+.modal-field label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.modal-field textarea {
+  min-height: 100px;
+}
+
+.required {
+  color: #e53935;
+}
+
+.optional {
+  color: #aaa;
+  font-weight: 400;
+  font-size: 0.82rem;
+}
+
+.modal-submit {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s;
+}
+
+.modal-submit:hover {
+  background: #e53935;
+}
+
+.modal-submit:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.modal-note {
+  font-size: 0.75rem;
+  color: #bbb;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.modal-success {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.modal-success-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.modal-success h4 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.modal-success p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
 /* ─── Планшет ─── */
 @media (max-width: 1024px) {
   .app-layout {

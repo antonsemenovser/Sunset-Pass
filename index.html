@@ -212,6 +212,60 @@
 
   </div>
 
+  <!-- Плавающая кнопка -->
+  <button class="fab" id="fabBtn" onclick="openModal()">✉ Форма по другому вопросу</button>
+
+  <!-- Модальное окно -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Обращение по другому вопросу</h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-subtitle">Заполните форму — мы свяжемся с вами в ближайшее время.</p>
+        <form id="generalForm" action="https://formspree.io/f/xrejjoav" method="POST">
+          <input type="hidden" name="form_type" value="general_inquiry">
+          <input type="hidden" name="_replyto" id="general_replyto">
+
+          <div class="modal-field">
+            <label for="g_subject">Тема обращения <span class="required">*</span></label>
+            <input type="text" id="g_subject" name="subject" required placeholder="Например: вопрос о сотрудничестве">
+          </div>
+
+          <div class="modal-field">
+            <label for="g_message">Сообщение <span class="required">*</span></label>
+            <textarea id="g_message" name="message" required placeholder="Опишите ваш вопрос или предложение..."></textarea>
+          </div>
+
+          <div class="modal-field">
+            <label for="g_name">Ваше имя <span class="required">*</span></label>
+            <input type="text" id="g_name" name="name" required placeholder="Имя и фамилия">
+          </div>
+
+          <div class="modal-field">
+            <label for="g_email">Электронная почта <span class="required">*</span></label>
+            <input type="email" id="g_email" name="email" required placeholder="ваш@email.com">
+          </div>
+
+          <div class="modal-field">
+            <label for="g_phone">Телефон <span class="optional">(необязательно)</span></label>
+            <input type="tel" id="g_phone" name="phone" placeholder="+358 XX XXX XXXX">
+          </div>
+
+          <button type="submit" class="modal-submit" id="generalSubmitBtn">Отправить обращение</button>
+          <p class="modal-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+        </form>
+        <div class="modal-success" id="modalSuccess" style="display:none;">
+          <div class="modal-success-icon">✅</div>
+          <h4>Обращение отправлено!</h4>
+          <p>Мы получили ваше сообщение и свяжемся с вами в ближайшее время.</p>
+          <button class="modal-submit" onclick="closeModal()">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
