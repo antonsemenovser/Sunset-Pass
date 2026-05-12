@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; form-action https://formspree.io; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://formspree.io">
+  <title>Sunset Pass — Уточняющий опросник</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Шапка компании -->
+  <div class="company-header">
+    <img src="logo.jpg" alt="Kot Kanagrilli Oy" class="company-logo">
+    <div class="company-info">
+      <div class="company-name">Kot Kanagrilli Oy</div>
+      <a href="mailto:kotkanagrilli@gmail.com" class="company-email">kotkanagrilli@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- Тулбар -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="toolbar-title">Saarijärven koirapuisto — Уточняющий опросник</span>
+      <span class="save-status" id="saveStatus"></span>
+    </div>
+    <div class="toolbar-right">
+      <button class="toolbar-btn" id="btnSave" title="Сохранить"><span class="btn-icon">💾</span><span class="btn-text"> Сохранить</span></button>
+    </div>
+  </div>
+
+  <!-- Flash сообщение -->
+  <div class="flash" id="flash"></div>
+
+  <!-- Основной макет -->
+  <div class="app-layout">
+
+    <div class="form-column">
+      <header>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">Заполнено: 0 из 16</p>
+      </header>
+
+      <form id="questionnaireForm" action="https://formspree.io/f/xrejjoav" method="POST">
+        <input type="hidden" name="_replyto" id="_replyto">
+        <input type="hidden" name="sender_time" id="sender_time">
+        <input type="hidden" name="sender_timezone" id="sender_timezone">
+        <input type="hidden" name="anton_time" id="anton_time">
+        <input type="hidden" name="questionnaire_number" value="2">
+
+        <!-- О воротах -->
+        <section class="section" data-section-id="gates">
+          <div class="section-header">
+            <h2>О воротах</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">Вы указали: <em>оборудования нет, нужно закупить с нуля.</em></p>
+
+          <div class="question" data-index="1">
+            <label for="gate_type">8а. Какой тип ворот на входе в парк?</label>
+            <textarea id="gate_type" name="gate_type" placeholder="Например: калитка / распашные / раздвижные"></textarea>
+          </div>
+
+          <div class="question" data-index="2">
+            <label for="gate_electricity">8б. Есть ли электричество рядом с воротами?</label>
+            <textarea id="gate_electricity" name="gate_electricity" placeholder="Например: да, розетка есть / нет, нужен аккумулятор"></textarea>
+          </div>
+
+          <div class="question" data-index="3">
+            <label for="gate_internet">8в. Достигает ли WiFi или мобильный интернет до ворот?</label>
+            <textarea id="gate_internet" name="gate_internet" placeholder="Например: да, WiFi есть / есть мобильная сеть 4G"></textarea>
+          </div>
+
+          <div class="question" data-index="4">
+            <label for="gate_camera">8г. Нужна ли камера видеонаблюдения у входа?</label>
+            <textarea id="gate_camera" name="gate_camera" placeholder="Например: да / нет / возможно позже"></textarea>
+          </div>
+        </section>
+
+        <!-- Об оплате -->
+        <section class="section" data-section-id="payment">
+          <div class="section-header">
+            <h2>Об оплате</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">Вы указали: <em>онлайн.</em></p>
+
+          <div class="question" data-index="5">
+            <label for="payment_provider">5а. Какой платёжный сервис предпочитаете?</label>
+            <textarea id="payment_provider" name="payment_provider" placeholder="Например: Paytrail (финский стандарт, поддерживает все банки) / Stripe / другой"></textarea>
+          </div>
+
+          <div class="question" data-index="6">
+            <label for="price_per_hour">5б. Сколько стоит один час аренды парка?</label>
+            <textarea id="price_per_hour" name="price_per_hour" placeholder="Например: 15€ за час"></textarea>
+          </div>
+
+          <div class="question" data-index="7">
+            <label for="price_tiers">5в. Будут ли разные тарифы?</label>
+            <textarea id="price_tiers" name="price_tiers" placeholder="Например: будни дешевле / выходные дороже / ночной тариф / один тариф для всех"></textarea>
+          </div>
+
+          <div class="question" data-index="8">
+            <label for="invoice">5г. Нужен ли счёт-фактура (lasku) для корпоративных клиентов?</label>
+            <textarea id="invoice" name="invoice" placeholder="Например: да / нет / не знаю пока"></textarea>
+          </div>
+        </section>
+
+        <!-- О бронировании -->
+        <section class="section" data-section-id="booking">
+          <div class="section-header">
+            <h2>О бронировании</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">Вы указали: <em>минимум 1 час, максимум 1 день.</em></p>
+
+          <div class="question" data-index="9">
+            <label for="closing_time">3а. Ворота закрываются автоматически в 23:00 или клиент может бронировать до конца суток?</label>
+            <textarea id="closing_time" name="closing_time" placeholder="Например: последний слот должен заканчиваться в 23:00 / можно до полуночи"></textarea>
+          </div>
+
+          <div class="question" data-index="10">
+            <label for="advance_booking">3б. Как далеко вперёд можно бронировать?</label>
+            <textarea id="advance_booking" name="advance_booking" placeholder="Например: максимум 30 дней / 2 месяца / без ограничений"></textarea>
+          </div>
+        </section>
+
+        <!-- О PIN-коде -->
+        <section class="section" data-section-id="pin">
+          <div class="section-header">
+            <h2>О PIN-коде и уведомлениях</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">Вы указали: <em>система генерирует PIN автоматически после оплаты.</em></p>
+
+          <div class="question" data-index="11">
+            <label for="pin_delivery">9а. Как клиент получает PIN — по email или в мобильном приложении?</label>
+            <textarea id="pin_delivery" name="pin_delivery" placeholder="Например: по email / в приложении / SMS"></textarea>
+          </div>
+
+          <div class="question" data-index="12">
+            <label for="time_warning">9б. Нужно ли уведомление клиенту когда время заканчивается?</label>
+            <textarea id="time_warning" name="time_warning" placeholder="Например: да, за 15 минут / да, за 30 минут / нет"></textarea>
+          </div>
+
+          <div class="question" data-index="13">
+            <label for="park_signal">9в. Будет ли сигнал на территории парка когда время вышло?</label>
+            <textarea id="park_signal" name="park_signal" placeholder="Например: да, лампочка / звуковой сигнал / нет, только уведомление в телефоне"></textarea>
+          </div>
+        </section>
+
+        <!-- Об управлении -->
+        <section class="section" data-section-id="admin">
+          <div class="section-header">
+            <h2>Об управлении бронированиями</h2>
+          </div>
+
+          <div class="question" data-index="14">
+            <label for="admin_view">10а. Как вы хотите видеть список бронирований?</label>
+            <textarea id="admin_view" name="admin_view" placeholder="Например: достаточно письма на email / нужна отдельная панель управления / оба варианта"></textarea>
+          </div>
+
+          <div class="question" data-index="15">
+            <label for="block_dates">10б. Нужна ли возможность заблокировать определённые дни?</label>
+            <textarea id="block_dates" name="block_dates" placeholder="Например: да, для техработ и отпуска / нет"></textarea>
+          </div>
+
+          <div class="question" data-index="16">
+            <label for="support_phone">10в. Если PIN не сработает — есть ли телефон поддержки, который мы укажем на сайте?</label>
+            <textarea id="support_phone" name="support_phone" placeholder="Например: да, мой номер +358 XX XXX XXXX / нет, только email"></textarea>
+          </div>
+        </section>
+
+        <!-- Юридическое -->
+        <section class="section" data-section-id="legal">
+          <div class="section-header">
+            <h2>Юридическое</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">В Финляндии по закону ЕС (GDPR) сайт обязан иметь политику конфиденциальности.</p>
+
+          <div class="question">
+            <label for="legal_terms">13а. Вы составите текст правил пользования парком самостоятельно или нам подготовить шаблон?</label>
+            <textarea id="legal_terms" name="legal_terms" placeholder="Например: подготовьте шаблон, я дополню / составлю сам / что это вообще такое?"></textarea>
+          </div>
+        </section>
+
+        <!-- О дизайне -->
+        <section class="section" data-section-id="design">
+          <div class="section-header">
+            <h2>О дизайне</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">Вы указали: <em>название Saarijärven koirapuisto, логотипа пока нет.</em></p>
+
+          <div class="question">
+            <label for="logo">14а. Логотип нужен? Если да — вы найдёте дизайнера или нам создать простой вариант?</label>
+            <textarea id="logo" name="logo" placeholder="Например: да, сделайте простой / найду дизайнера сам / логотип не нужен"></textarea>
+          </div>
+
+          <div class="question">
+            <label for="design_style">14б. Есть ли пожелания по цветам или стилю сайта?</label>
+            <textarea id="design_style" name="design_style" placeholder="Например: природные цвета, зелёный / современный минимализм / нет предпочтений"></textarea>
+          </div>
+        </section>
+
+        <!-- О формате продукта -->
+        <section class="section" data-section-id="product">
+          <div class="section-header">
+            <h2>О формате продукта</h2>
+          </div>
+          <p style="font-size:0.88rem;color:#888;margin-bottom:16px;">Мы можем реализовать проект в нескольких вариантах:</p>
+
+          <div style="background:#f8fffe;border:1.5px solid #c8e6c9;border-radius:10px;padding:16px 20px;margin-bottom:12px;">
+            <strong>Вариант 1 — Простой сайт</strong> <em style="color:#888;">(быстро, дёшево)</em><br>
+            <span style="font-size:0.9rem;">Сайт на финском: календарь слотов, онлайн-оплата, PIN по email. Работает на любом телефоне через браузер.</span>
+          </div>
+
+          <div style="background:#f0faf4;border:2px solid #2d6a4f;border-radius:10px;padding:16px 20px;margin-bottom:12px;">
+            <strong>Вариант 2 — Продвинутый сайт</strong> <em style="color:#2d6a4f;">(рекомендуем)</em><br>
+            <span style="font-size:0.9rem;">То же + SMS-уведомления, напоминания перед концом слота, панель управления для вас (блокировка дат, просмотр бронирований, статистика).</span>
+          </div>
+
+          <div style="background:#fff8f0;border:1.5px solid #ffe0b2;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
+            <strong>Вариант 3 — Сайт + мобильное приложение</strong> <em style="color:#888;">(максимум)</em><br>
+            <span style="font-size:0.9rem;">То же + приложение для iOS и Android. PIN приходит в приложение, уведомления через приложение. Самый удобный вариант для клиентов.</span>
+          </div>
+
+          <div class="question">
+            <label for="product_choice">16а. Какой вариант вам ближе?</label>
+            <textarea id="product_choice" name="product_choice" placeholder="Например: вариант 2 / вариант 3 / хочу обсудить на звонке / не знаю пока"></textarea>
+          </div>
+        </section>
+
+        <!-- Контактные данные -->
+        <section class="section" data-section-id="contacts">
+          <div class="section-header">
+            <h2>Ваши контактные данные</h2>
+          </div>
+          <div class="question">
+            <label for="client_name">Имя</label>
+            <input type="text" id="client_name" name="client_name" required placeholder="Ваше имя" value="Sirpa Lehtinen">
+          </div>
+          <div class="question">
+            <label for="client_email">Email</label>
+            <input type="email" id="client_email" name="client_email" required placeholder="ваш@email.com" value="sirpulik@gmail.com">
+          </div>
+          <div class="question">
+            <label for="client_phone">Телефон (необязательно)</label>
+            <input type="tel" id="client_phone" name="client_phone" placeholder="+358 XX XXX XXXX">
+          </div>
+        </section>
+
+        <button type="submit" id="submitBtn">Отправить ответы</button>
+        <p class="submit-note">После отправки мы свяжемся с вами в течение 1-2 рабочих дней.</p>
+
+      </form>
+    </div>
+
+    <!-- Панель предпросмотра -->
+    <div class="preview-column">
+      <div class="preview-panel">
+        <div class="preview-header">Предпросмотр</div>
+        <div class="preview-a4" id="previewContent">
+          <p class="preview-empty">Начните заполнять форму — здесь появится предпросмотр</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script2.js"></script>
+</body>
+</html>
