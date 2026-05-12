@@ -14,6 +14,27 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('_replyto').value = this.value;
   });
 
+  document.getElementById('questionnaireForm').addEventListener('submit', function () {
+    const now = new Date();
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const offsetMin = -now.getTimezoneOffset();
+    const offsetSign = offsetMin >= 0 ? '+' : '-';
+    const offsetHours = String(Math.floor(Math.abs(offsetMin) / 60)).padStart(2, '0');
+    const offsetMins = String(Math.abs(offsetMin) % 60).padStart(2, '0');
+    const senderTime = now.toLocaleString('ru-RU', { hour12: false }) + ` (UTC${offsetSign}${offsetHours}:${offsetMins}, ${tz})`;
+
+    const antonTime = now.toLocaleString('ru-RU', {
+      timeZone: 'Europe/Helsinki',
+      hour12: false,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    }) + ' (UTC+3, Финляндия)';
+
+    document.getElementById('sender_time').value = senderTime;
+    document.getElementById('sender_timezone').value = tz;
+    document.getElementById('anton_time').value = antonTime;
+  }, true);
+
   document.getElementById('btnReset').addEventListener('click', resetForm);
   document.getElementById('btnSave').addEventListener('click', saveManual);
   document.getElementById('btnShare').addEventListener('click', shareForm);
